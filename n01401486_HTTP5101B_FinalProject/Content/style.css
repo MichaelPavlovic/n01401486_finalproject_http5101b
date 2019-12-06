@@ -1,4 +1,19 @@
-﻿.table {
+﻿footer {
+    border-top: 1px solid black;
+    padding: 1em;
+}
+.left {
+    display: inline-block;
+}
+.right {
+    float: right;
+    padding-top: 1.5em;
+}
+#page-viewer li {
+    margin-right:1em;
+}
+/*table styling*/
+.table {
     display: table;
 }
 .table-head {
@@ -8,9 +23,9 @@
     display: table-cell;
     font-weight: bold;
     color: white;
-    background-color: #343049;
+    background-color: #222222;
     padding: 0.5em 0.5em;
-    border: 1px solid #343049;
+    border: 1px solid #222222;
     text-align: center;
 }
 .table-body {
@@ -33,18 +48,41 @@
 .button:last-child {
     padding-right: 0;
 }
+/*form stuff*/
+.form-field {
+    padding-bottom: 1em;
+}
+.form-label {
+    padding-right: 1em;
+}
+.form-label-align {
+    vertical-align: top;
+}
 /*buttons*/
+.button-container {
+    margin-top: 2em;
+}
 .add {
     background-color: #4CAF50;
-    color:white;
-    padding:0.3em 0.5em;
-    text-align:center;
-    border:none;
+    color: white;
+    padding: 0.5em 1em;
+    text-align: center;
+    border: none;
+    margin-right: 1.5em;
 }
 .delete {
     background-color: #f44336;
     color: white;
-    padding: 0.3em 0.5em;
+    padding: 0.5em 1em;
     text-align: center;
     border: none;
+    margin-right: 1.5em;
+}
+/**/
+.page-author {
+    font-size:0.9em;
+}
+.main {
+    padding:1em;
+    margin-bottom:1em;
 }

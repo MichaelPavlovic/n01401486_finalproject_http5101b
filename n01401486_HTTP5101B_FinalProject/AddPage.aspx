@@ -2,8 +2,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Add a new Page</h2>
     <div class="form-field">
-        <label for="page_title">Page Title:</label>
-        <asp:TextBox runat="server" ID="page_title"></asp:TextBox>
+        <label class="form-label" for="page_title">Page Title:</label>
+        <asp:TextBox runat="server" ID="page_title" Width="300px"></asp:TextBox>
         <asp:RequiredFieldValidator 
             runat="server"
             EnableClientScript="true"
@@ -13,8 +13,8 @@
         </asp:RequiredFieldValidator>
     </div>
     <div class="form-field">
-        <label for="page_author">Author:</label>
-        <asp:TextBox runat="server" ID="page_author"></asp:TextBox>
+        <label class="form-label" for="page_author">Author:</label>
+        <asp:TextBox runat="server" ID="page_author" Width="300px"></asp:TextBox>
         <asp:RequiredFieldValidator 
             runat="server"
             EnableClientScript="true"
@@ -24,7 +24,7 @@
         </asp:RequiredFieldValidator>
     </div>
     <div class="form-field">
-        <label for="page_body">Page Content:</label>
+        <label class="form-label form-label-align" for="page_body">Page Content:</label>
         <asp:TextBox runat="server" ID="page_body" TextMode="MultiLine"></asp:TextBox>
         <asp:RequiredFieldValidator 
             runat="server"
@@ -35,7 +35,7 @@
         </asp:RequiredFieldValidator>
     </div>
     <div class="form-field">
-        <label for="page_col1">Page Column 1:</label>
+        <label class="form-label form-label-align" for="page_col1">Page Column 1:</label>
         <asp:TextBox runat="server" ID="page_col1" TextMode="MultiLine"></asp:TextBox>
         <asp:RequiredFieldValidator 
             runat="server"
@@ -46,7 +46,7 @@
         </asp:RequiredFieldValidator>
     </div>
     <div class="form-field">
-        <label for="page_col2">Page Column 2:</label>
+        <label class="form-label form-label-align" for="page_col2">Page Column 2:</label>
         <asp:TextBox runat="server" ID="page_col2" TextMode="MultiLine"></asp:TextBox>
         <asp:RequiredFieldValidator 
             runat="server"
@@ -56,5 +56,6 @@
             ForeColor="Red">
         </asp:RequiredFieldValidator>
     </div>
-    <asp:Button  OnClick="Add_Page" runat="server" CssClass="add" Text="Add Page" />
+    <asp:Button OnClick="Add_Page" runat="server" CssClass="add" Text="Add Page" />
+    <a class="cancel" href="ListPages.aspx">Cancel</a>
 </asp:Content>
