@@ -10,16 +10,16 @@ namespace n01401486_HTTP5101B_FinalProject
 {
     public class PageDB
     {
-        //reference:
+        //reference: Based off of SCHOOLDB and Controller classes provided by Christine Bittle https://github.com/christinebittle/crud_essentials
 
         //info to connect to database
-        private static string User { get { return "root"; } }
-        private static string Password { get { return "root"; } }
-        private static string Database { get { return "page"; } }
-        private static string Server { get { return "localhost"; } }
-        private static string Port { get { return "3306"; } }
+        private static string User { get { return "root"; } } //username
+        private static string Password { get { return "root"; } } //password
+        private static string Database { get { return "page"; } } //database name
+        private static string Server { get { return "localhost"; } } //connection url
+        private static string Port { get { return "3306"; } } //connection port
 
-        //
+        //ConnectionString is used to connect to a database
         protected static string ConnectionString
         {
             get
@@ -32,6 +32,7 @@ namespace n01401486_HTTP5101B_FinalProject
             }
         }
 
+        //returns a result set of a list of dictionaries
         public List<Dictionary<String, String>> List_Query(string query)
         {
             MySqlConnection Connect = new MySqlConnection(ConnectionString);
@@ -40,24 +41,26 @@ namespace n01401486_HTTP5101B_FinalProject
 
             try
             {
+                //output debugging lines to console
                 Debug.WriteLine("Connection Initialized...");
                 Debug.WriteLine("Attempting to execute query " + query);
                 
+                //open db connection
                 Connect.Open();
-                
+                //give connection a query
                 MySqlCommand cmd = new MySqlCommand(query, Connect);
-
+                //get resultset
                 MySqlDataReader resultset = cmd.ExecuteReader();
 
-
+                //loop for every row in the resultset
                 while (resultset.Read())
                 {
                     Dictionary<String, String> Row = new Dictionary<String, String>();
                     
+                    //loop for every column in the row
                     for (int i = 0; i < resultset.FieldCount; i++)
                     {
                         Row.Add(resultset.GetName(i), resultset.GetString(i));
-
                     }
 
                     ResultSet.Add(Row);
@@ -68,11 +71,12 @@ namespace n01401486_HTTP5101B_FinalProject
             }
             catch (Exception ex)
             {
+                //output execption thrown to the console
                 Debug.WriteLine("Something went wrong in the List_Query method!");
                 Debug.WriteLine(ex.ToString());
-
             }
 
+            //close db connection
             Connect.Close();
             Debug.WriteLine("Database Connection Terminated.");
 
@@ -81,7 +85,7 @@ namespace n01401486_HTTP5101B_FinalProject
 
         public void AddPage(Page new_page)
         {
-
+            //one method of injecting data into a string NOTE: sensitive to SQL injection
             string query = "insert into pages (pagetitle, pagebody, author, pagecol1, pagecol2) values ('{0}','{1}','{2}','{3}','{4}')";
             query = String.Format(query, new_page.GetPageTitle(), new_page.GetPageBody(), new_page.GetPageAuthor(), new_page.GetPageCol1(), new_page.GetPageCol2());
 
@@ -89,9 +93,10 @@ namespace n01401486_HTTP5101B_FinalProject
             MySqlCommand cmd = new MySqlCommand(query, Connect);
             try
             {
+                //open db connection and execute 
                 Connect.Open();
+                //for executing queries that don't return data, returns number of rows affected
                 cmd.ExecuteNonQuery();
-
             }
             catch (Exception ex)
             {
@@ -99,12 +104,13 @@ namespace n01401486_HTTP5101B_FinalProject
                 Debug.WriteLine(ex.ToString());
             }
 
+            //close db connection
             Connect.Close();
         }
 
         public void DeletePage(int pageid)
         {
-            
+            //delete a specific page
             string query = "delete from pages where pageid = {0}";
             query = String.Format(query, pageid);
 
@@ -129,12 +135,12 @@ namespace n01401486_HTTP5101B_FinalProject
         public Page FindPage(int id)
         {
             MySqlConnection Connect = new MySqlConnection(ConnectionString);
-
+            //make a blank page so the method can return something if page data can not be found
             Page result_page = new Page();
 
             try
             {
-                
+                //add passed in parameter to the query
                 string query = "select * from pages where pageid = " + id;
                 Debug.WriteLine("Connection Initialized...");
                 
@@ -144,19 +150,22 @@ namespace n01401486_HTTP5101B_FinalProject
                 
                 MySqlDataReader resultset = cmd.ExecuteReader();
 
-                
+                //list of pages
                 List<Page> pages = new List<Page>();
 
+                //loop through each row in the result set
                 while (resultset.Read())
                 {
                     Page currentpage = new Page();
 
+                    //loop for each column in a row
                     for (int i = 0; i < resultset.FieldCount; i++)
                     {
                         string key = resultset.GetName(i);
                         string value = resultset.GetString(i);
                         Debug.WriteLine("Attempting to transfer " + key + " data of " + value);
 
+                        //go through each column to insert data into the right property
                         switch (key)
                         {
                             case "pagetitle":
@@ -177,10 +186,10 @@ namespace n01401486_HTTP5101B_FinalProject
                         }
 
                     }
-                    
+                    //add page to list
                     pages.Add(currentpage);
                 }
-
+                //get the first page
                 result_page = pages[0];
 
             }
@@ -198,6 +207,7 @@ namespace n01401486_HTTP5101B_FinalProject
 
         public void EditPage(int pageid, Page new_page)
         {
+            //similar to addpage method but update is used in the query to update the data instead of insert into
             string query = "update pages set pagetitle='{0}', pagebody='{1}', author='{2}', pagecol1='{3}', pagecol2='{4}' where pageid={5}";
             query = String.Format(query, new_page.GetPageTitle(), new_page.GetPageBody(), new_page.GetPageAuthor(), new_page.GetPageCol1(), new_page.GetPageCol2(), pageid);
 
