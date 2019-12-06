@@ -25,7 +25,7 @@ namespace n01401486_HTTP5101B_FinalProject
 
                 string pageid = row["pageid"];
 
-                page_viewer.InnerHtml += "<a href=\"ShowPage.aspx?pageid=" + pageid + "\">" + row["pagetitle"] + "</a>" + " ";
+                page_viewer.InnerHtml += "<li><a href=\"ShowPage.aspx?pageid=" + pageid + "\">" + row["pagetitle"] + "</a></li>";
             }
         }
     }

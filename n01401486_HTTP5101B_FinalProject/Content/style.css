@@ -1,4 +1,6 @@
-﻿footer {
+﻿/*list page styles*/
+footer {
+    clear:both;
     border-top: 1px solid black;
     padding: 1em;
 }
@@ -9,8 +11,12 @@
     float: right;
     padding-top: 1.5em;
 }
-#page-viewer li {
-    margin-right:1em;
+.page-viewer {
+    list-style: none;
+}
+.page-viewer li {
+    display: inline-block;
+    padding-right: 1.5em;
 }
 /*table styling*/
 .table {
@@ -59,6 +65,9 @@
     vertical-align: top;
 }
 /*buttons*/
+#addbtn a {
+    background-color:green;
+}
 .button-container {
     margin-top: 2em;
 }
@@ -78,11 +87,26 @@
     border: none;
     margin-right: 1.5em;
 }
-/**/
+/*Generated page styles*/
 .page-author {
-    font-size:0.9em;
+    font-size: 0.8em;
 }
 .main {
-    padding:1em;
-    margin-bottom:1em;
+    border:1px solid black;
+    padding: 1em;
+    margin-bottom: 1em;
+}
+.col1 {
+    border: 1px solid black;
+    float: left;
+    width: 45%;
+    padding: 1em;
+    margin-bottom:3em;
+}
+.col2 {
+    border: 1px solid black;
+    float: right;
+    width: 45%;
+    padding: 1em;
+    margin-bottom: 3em;
 }
